@@ -17,5 +17,13 @@ class ScoreTrackerTest {
 
         Assert.assertEquals("fifteen love", tracker.score())
     }
-    
+
+    @Test fun shouldScoreFifteenAll() {
+        val tracker = ScoreTracker("p1", "p2")
+
+        tracker.p1Score()
+        tracker.p2Score()
+
+        Assert.assertEquals("fifteen all", tracker.score())
+    }
 }
