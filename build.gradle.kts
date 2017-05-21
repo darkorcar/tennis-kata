@@ -19,7 +19,7 @@ apply {
 }
 
 application {
-    mainClassName = "tennis.HelloWorldKt"
+    mainClassName = "samples.HelloWorldKt"
 }
 
 repositories {
