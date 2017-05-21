@@ -6,30 +6,47 @@ class ScoreTracker(val p1: String, val p2: String) {
     var p2Score: Int = 0
 
     fun score(): String {
-        val result = if(p1Score == 1 && p2Score == 0) {
+        val result = if (p1Score == 1 && p2Score == 0) {
             "fifteen love"
-        } else if(p1Score == 1 && p2Score == 1) {
-            "fifteen all"
-        } else if(p1Score == 2 && p2Score == 1) {
+        } else if (p1Score == 2 && p2Score == 1) {
             "thirty fifteen"
-        } else if(p1Score == 3 && p2Score == 1) {
-        "forty fifteen"
-        } else if(p1Score == 4 && p2Score == 1) {
-            "$p1 win"
-        } else if(p1Score >= 3 && p2Score >= 3 && p1Score == p2Score) {
+        } else if (p1Score == 3 && p2Score == 1) {
+            "forty fifteen"
+        } else if (isAll()) {
+          "${asString(p1Score)} all"
+        } else if (isWin()) {
+            "${winningPlayer()} win"
+        } else if (isDeuce()) {
             "deuce"
-        } else if(p1Score >= 3 && p2Score >= 3 && p1Score != p2Score) {
-            if(p1Score > p2Score) {
-                "advantage $p1"
-            } else {
-                "advantage $p2"
-            }
+        } else if (isAdvantage()) {
+            "advantage ${winningPlayer()}"
         } else {
             "love all"
         }
 
         return result
     }
+
+    private fun asString(score: Int) = when(score) {
+        0 -> "love"
+        1 -> "fifteen"
+        2 -> "thirty"
+        3 -> "forty"
+        else -> "bollocks..."
+    }
+
+    private fun isAll() = p1Score < 3 && p2Score < 3 && p1Score == p2Score
+
+    private fun isAdvantage() = p1Score >= 3 && p2Score >= 3 && p1Score != p2Score
+
+    private fun isDeuce() = p1Score >= 3 && p2Score >= 3 && p1Score == p2Score
+
+    private fun isWin(): Boolean {
+        return (p1Score > 3 || p2Score > 3) &&
+                ((p1Score - 2 >= p2Score) || (p2Score - 2 >= p1Score))
+    }
+
+    private fun winningPlayer() = if(p1Score > p2Score) "$p1" else "$p2"
 
     fun p1Score(): Unit {
         p1Score += 1
