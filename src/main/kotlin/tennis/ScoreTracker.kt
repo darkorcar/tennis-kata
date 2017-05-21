@@ -6,13 +6,7 @@ class ScoreTracker(val p1: String, val p2: String) {
     var p2Score: Int = 0
 
     fun score(): String {
-        val result = if (p1Score == 1 && p2Score == 0) {
-            "fifteen love"
-        } else if (p1Score == 2 && p2Score == 1) {
-            "thirty fifteen"
-        } else if (p1Score == 3 && p2Score == 1) {
-            "forty fifteen"
-        } else if (isAll()) {
+        val result = if (isAll()) {
           "${asString(p1Score)} all"
         } else if (isWin()) {
             "${winningPlayer()} win"
@@ -21,7 +15,7 @@ class ScoreTracker(val p1: String, val p2: String) {
         } else if (isAdvantage()) {
             "advantage ${winningPlayer()}"
         } else {
-            "love all"
+            "${asString(p1Score)} ${asString(p2Score)}"
         }
 
         return result
