@@ -16,7 +16,10 @@ class ScoreTracker(val p1: String, val p2: String) {
         "forty fifteen"
         } else if(p1Score == 4 && p2Score == 1) {
             "$p1 win"
-        } else {
+        } else if(p1Score >= 3 && p2Score >= 3 && p1Score == p2Score) {
+            "deuce"
+        }
+        else {
             "love all"
         }
 
