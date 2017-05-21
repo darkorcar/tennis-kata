@@ -86,4 +86,19 @@ class ScoreTrackerTest {
 
         Assert.assertEquals("advantage p2", tracker.score())
     }
+
+    @Test fun shouldScoreFullGame() {
+        val tracker = ScoreTracker("p1", "p2")
+
+        tracker.p1Score()
+        tracker.p1Score()
+        tracker.p2Score()
+        tracker.p2Score()
+        tracker.p1Score()
+        tracker.p2Score()
+        tracker.p1Score()
+        tracker.p1Score()
+
+        Assert.assertEquals("p1 win", tracker.score())
+    }
 }

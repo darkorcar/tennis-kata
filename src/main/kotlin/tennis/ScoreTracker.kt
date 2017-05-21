@@ -7,13 +7,13 @@ class ScoreTracker(val p1: String, val p2: String) {
 
     fun score(): String {
         val result = if (isAll()) {
-          "${asString(p1Score)} all"
-        } else if (isWin()) {
-            "${winningPlayer()} win"
+            "${asString(p1Score)} all"
         } else if (isDeuce()) {
             "deuce"
         } else if (isAdvantage()) {
             "advantage ${winningPlayer()}"
+        } else if (isWin()) {
+            "${winningPlayer()} win"
         } else {
             "${asString(p1Score)} ${asString(p2Score)}"
         }
@@ -21,7 +21,7 @@ class ScoreTracker(val p1: String, val p2: String) {
         return result
     }
 
-    private fun asString(score: Int) = when(score) {
+    private fun asString(score: Int) = when (score) {
         0 -> "love"
         1 -> "fifteen"
         2 -> "thirty"
@@ -31,7 +31,10 @@ class ScoreTracker(val p1: String, val p2: String) {
 
     private fun isAll() = p1Score < 3 && p2Score < 3 && p1Score == p2Score
 
-    private fun isAdvantage() = p1Score >= 3 && p2Score >= 3 && p1Score != p2Score
+    private fun isAdvantage(): Boolean {
+        return (p1Score > 2 && p2Score > 2) &&
+                ((p1Score - 1 == p2Score) || (p1Score + 1 == p2Score))
+    }
 
     private fun isDeuce() = p1Score >= 3 && p2Score >= 3 && p1Score == p2Score
 
@@ -40,7 +43,7 @@ class ScoreTracker(val p1: String, val p2: String) {
                 ((p1Score - 2 >= p2Score) || (p2Score - 2 >= p1Score))
     }
 
-    private fun winningPlayer() = if(p1Score > p2Score) "$p1" else "$p2"
+    private fun winningPlayer() = if (p1Score > p2Score) "$p1" else "$p2"
 
     fun p1Score(): Unit {
         p1Score += 1
