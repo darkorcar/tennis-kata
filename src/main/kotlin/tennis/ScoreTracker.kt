@@ -10,6 +10,8 @@ class ScoreTracker(p1: String, p2: String) {
             "fifteen love"
         } else if(p1Score == 1 && p2Score == 1) {
             "fifteen all"
+        } else if(p1Score == 2 && p2Score == 1) {
+            "thirty fifteen"
         } else {
             "love all"
         }
