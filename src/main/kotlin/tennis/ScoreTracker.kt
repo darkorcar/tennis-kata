@@ -1,6 +1,6 @@
 package tennis
 
-class ScoreTracker(p1: String, p2: String) {
+class ScoreTracker(val p1: String, val p2: String) {
 
     var p1Score: Int = 0
     var p2Score: Int = 0
@@ -12,6 +12,10 @@ class ScoreTracker(p1: String, p2: String) {
             "fifteen all"
         } else if(p1Score == 2 && p2Score == 1) {
             "thirty fifteen"
+        } else if(p1Score == 3 && p2Score == 1) {
+        "forty fifteen"
+        } else if(p1Score == 4 && p2Score == 1) {
+            "$p1 win"
         } else {
             "love all"
         }
